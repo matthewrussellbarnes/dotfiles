@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 apps=(
-    alfred
     dash
     dropbox
     firefox

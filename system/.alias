@@ -2,6 +2,7 @@
 
 alias rr="rm -rf"
 alias be="bundle exec"
+alias ag="ag --hidden"
 
 is-executable hub && eval "$(hub alias -s)" # alias git=hub
 

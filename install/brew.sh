@@ -14,6 +14,7 @@ apps=(
     cmake
     coreutils
     dockutil
+    elixir
     ag
     git
     mackup

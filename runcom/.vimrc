@@ -1,9 +1,10 @@
+" let $VIMRUNTIME = "/usr/local/Cellar/vim/8.0.0086/share/vim/vim80/"
+" set runtimepath=~/.vim/,~/.vim,/etc/vim,/usr/share/vim/vimfiles,/usr/share/vim/addons,/usr/share/vim/vim80,/usr/share/vim/vimfiles,/usr/share/vim/addons/after,~/.vim/after
 " Section: Vundle
 
   set mouse=a
   set nocompatible              " be iMproved, required
   filetype off                  " required
-
 
   " VUNDLE
   " set the runtime path to include Vundle and initialize
@@ -11,13 +12,20 @@
   scriptencoding utf-8
   call vundle#begin('~/.vim/bundle')
 
+  " JS and React Stuff
+  Plugin 'pangloss/vim-javascript'
+  Plugin 'mxw/vim-jsx'
   Plugin 'gmarik/Vundle.vim'
   Plugin 'rking/ag.vim'
   Plugin 'kien/ctrlp.vim'
+  Plugin 'rizzatti/dash.vim'
+  Plugin 'editorconfig/editorconfig-vim'
+  Plugin 'ervandew/supertab'
   Plugin 'scrooloose/nerdtree'
   Plugin 'scrooloose/nerdcommenter'
   " Plugin 'luochen1990/rainbow'
   Plugin 'bling/vim-airline'
+  Plugin 'vim-airline/vim-airline-themes'
   Plugin 'tpope/vim-endwise'
   Plugin 'elixir-lang/vim-elixir'
   Plugin 'tpope/vim-rails'
@@ -31,11 +39,23 @@
   Plugin 'christoomey/vim-tmux-navigator' "Easy Pane Switching
   Plugin 'jgdavey/vim-turbux' " TDD - run tests easily
   Plugin 'benmills/vimux'
-  Plugin 'Valloric/YouCompleteMe'
+  " Plugin 'junegunn/fzf'
+  " Plugin 'junegunn/fzf.vim'
+
+  " Plugin 'Valloric/YouCompleteMe'
 
   call vundle#end()            " required
   filetype plugin indent on    " required
 
+" Airline
+  set laststatus=2
+  let g:airline_theme='solarized'
+  let g:airline_section_a = airline#section#create(['mode'])
+  let g:airline_section_b = airline#section#create([])
+  let g:airline_section_c = airline#section#create(['%f'])
+  let g:airline_section_x = airline#section#create_right([])
+  let g:airline_section_y = airline#section#create_right([])
+  let g:airline_section_z = airline#section#create_right(['%l/%L : %c'])
 " Section: Basic VIM Setup
   " Remap leader key
   let mapleader=","
@@ -45,13 +65,18 @@
   ",V reloads it -- making all changes active (have to save first)
   map <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
 
-  " the finder window
+    " the finder window
   nmap <Leader>f :CtrlP<CR>
   nmap <Leader>F :CtrlP<CR><F5>
   " let ctrlp see hidden files by default
   let g:ctrlp_show_hidden = 1
+  " let g:ctrlp_custom_ignore = {
+  "   \ 'dir':  '\v[\/]\.(bundle)$',
+  "   \ }
+  " \ 'file': '\v\.(exe|so|dll)$',
+  " \ 'link': 'some_bad_symbolic_links',
   let g:ctrlp_custom_ignore = {
-    \ 'dir':  '\v[\/]\.(bundle)$',
+    \ 'dir':  '\v[\/](\.bundle|\.sass-cache|\.git|\.hg|\.svn|node_modules|public\/assets\/js|public\/assets\/css|spec/fixtures)$',
     \ }
 
   " Make backspace work in insert mode
@@ -147,22 +172,24 @@
 " Section: NerdTree - Project Sidebar
   " quit NERDTree after openning a file
   let NERDTreeQuitOnOpen=1
+  let NERDTreeShowHidden=1
+  let g:NERDTreeIgnore=['.bundle','.git','node_modules']
   " Toggle NERDTree with <leader>,
   map <silent> <leader>. :execute 'NERDTreeToggle ' . getcwd()<CR>
   " Open current file in nerdtree
   nmap \| :execute 'NERDTreeFind'<CR>
 
 " Section: Autocompletion!
-  let g:ycm_collect_identifiers_from_tags_files = 1
+  " let g:ycm_collect_identifiers_from_tags_files = 1
 
-  autocmd FileType ruby set omnifunc=rubycomplete#Complete
-  autocmd FileType python set omnifunc=pythoncomplete#Complete
-  autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-  autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
-  autocmd FileType css set omnifunc=csscomplete#CompleteCSS
-  autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
-  autocmd FileType php set omnifunc=phpcomplete#CompletePHP
-  autocmd FileType c set omnifunc=ccomplete#Complete
+  " autocmd FileType ruby set omnifunc=rubycomplete#Complete
+  " autocmd FileType python set omnifunc=pythoncomplete#Complete
+  " autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+  " autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+  " autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+  " autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
+  " autocmd FileType php set omnifunc=phpcomplete#CompletePHP
+  " autocmd FileType c set omnifunc=ccomplete#Complete
 
 " Section: Syntastic!
   set statusline+=%#warningmsg#
@@ -173,3 +200,4 @@
   let g:syntastic_auto_loc_list = 0
   let g:syntastic_check_on_open = 1
   let g:syntastic_check_on_wq = 0
+  let g:syntastic_javascript_checkers = ['eslint']
