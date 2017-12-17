@@ -11,6 +11,7 @@ DOTFILES_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # Bunch of symlinks
 
+ln -sfv "$DOTFILES_DIR/runcom/.ruby-version" ~
 ln -sfv "$DOTFILES_DIR/runcom/.bash_profile" ~
 ln -sfv "$DOTFILES_DIR/runcom/.inputrc" ~
 ln -sfv "$DOTFILES_DIR/runcom/.vimrc" ~
