@@ -13,4 +13,5 @@
 
 # Set up for colors (solarized)
 
+. "$DOTFILES_DIR/linux/ruby.sh"
 . "$DOTFILES_DIR/install/ruby.sh"

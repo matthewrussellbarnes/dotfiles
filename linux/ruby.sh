@@ -23,5 +23,3 @@ sudo make install
 echo "install of ruby-install complete"
 
 cd ~/ && rm -rf "$TMP_DIR"
-
-ruby-install ruby 2.4.2
