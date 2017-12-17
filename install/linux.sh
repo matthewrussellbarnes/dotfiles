@@ -17,3 +17,6 @@
 
 . "$DOTFILES_DIR/linux/ruby.sh"
 . "$DOTFILES_DIR/install/ruby.sh"
+
+# Install ASDF and packages
+. "$DOTFILES_DIR/linux/asdf.sh"
