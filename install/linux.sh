@@ -9,7 +9,7 @@
 # Set up for colors (solarized) (do after vim!)
 
 # Needs edit to support osx vs linux
-# . "$DOTFILES_DIR/install/colors.sh"
+. "$DOTFILES_DIR/linux/colors.sh"
 
 # Set up for colors (solarized)
 
