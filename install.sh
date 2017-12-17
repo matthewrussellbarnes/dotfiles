@@ -23,3 +23,6 @@ ln -sfv "$DOTFILES_DIR/etc/mackup/.mackup.cfg" ~
 if [ "$(uname)" == "Darwin" -a -f "$DOTFILES_DIR/install/osx.sh" ]; then
     . "$DOTFILES_DIR/install/osx.sh"
 fi
+if [ "$(uname)" == "Linux" -a -f "$DOTFILES_DIR/install/linux.sh" ]; then
+    . "$DOTFILES_DIR/install/linux.sh"
+fi
