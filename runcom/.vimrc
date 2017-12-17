@@ -27,13 +27,14 @@
   Plugin 'bling/vim-airline'
   Plugin 'vim-airline/vim-airline-themes'
   Plugin 'tpope/vim-endwise'
-  Plugin 'elixir-lang/vim-elixir'
+  Plugin 'elixir-editors/vim-elixir'
   Plugin 'tpope/vim-rails'
   Plugin 'kchmck/vim-coffee-script'
   Plugin 'Lokaltog/vim-easymotion'
   Plugin 'vim-ruby/vim-ruby'
   Plugin 'slim-template/vim-slim'
   Plugin 'tpope/vim-fugitive'
+  Plugin 'derekwyatt/vim-scala'
   Plugin 'tpope/vim-surround'
   Plugin 'scrooloose/syntastic'
   Plugin 'christoomey/vim-tmux-navigator' "Easy Pane Switching
@@ -76,7 +77,7 @@
   " \ 'file': '\v\.(exe|so|dll)$',
   " \ 'link': 'some_bad_symbolic_links',
   let g:ctrlp_custom_ignore = {
-    \ 'dir':  '\v[\/](\.bundle|\.sass-cache|\.git|\.hg|\.svn|node_modules|public\/assets\/js|public\/assets\/css|spec/fixtures)$',
+    \ 'dir':  '\v[\/](\.bundle|\.sass-cache|\.git|\.hg|\.svn|tmp|_build|deps|node_modules|public\/assets\/js|public\/assets\/css|spec/fixtures)$',
     \ }
 
   " Make backspace work in insert mode
@@ -149,6 +150,8 @@
   autocmd BufWritePre .vimrc :%s/\s\+$//e
   " unwanted whitespace removal/cleaning
   autocmd BufWritePre *.rb :%s/\s\+$//e
+  autocmd BufWritePre *.ex :%s/\s\+$//e
+  autocmd BufWritePre *.exs :%s/\s\+$//e
   autocmd BufWritePre *.py :%s/\s\+$//e
   autocmd BufWritePre *.php :%s/\s\+$//e
   autocmd BufWritePre *.haml :%s/\s\+$//e
