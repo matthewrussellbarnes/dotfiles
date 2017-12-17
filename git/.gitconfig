@@ -29,6 +29,15 @@
     g = grep --break --heading --line-number
     amend = commit --amend --reuse-message=HEAD
     contrib = shortlog --summary --numbered
+    heroku-prod-deployed-commit=!sh -c 'heroku releases -r production | grep Deploy | tr -s \" \" | cut -d \" \" -f 3 | head -n 1' -
+    remote-repo-url=!sh -c 'git config --get remote.origin.url | sed -e 's/git@//g' | sed -e 's/\\.git//g' | sed -e 's=\\:=\\/=g'' | xargs -I url echo 'https://'url
+    latest-master-sha=!sh -c 'git fetch && git log origin/master --oneline | head -1 | cut -d\" \" -f1' -
+    compare-heroku=!sh -c 'open $(git remote-repo-url)/compare/$(git heroku-prod-deployed-commit)...$(git latest-master-sha)' -
+    cleanup = "!git branch --merged master | grep  -v '\\*\\|master\\|develop' | xargs -n 1 git branch -d"
+    lc = "!git rev-parse HEAD | tr -d '\n'"
+    lcc = "!git rev-parse HEAD | tr -d '\n' | pbcopy"
+
+
 	# List files ignored by .gitignore and friends
 	show-ignored = "! git clean -ndX | perl -pe 's/Would remove/Ignored:/'"
 

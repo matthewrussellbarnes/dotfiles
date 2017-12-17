@@ -437,6 +437,9 @@ defaults write com.apple.appstore WebKitDeveloperExtras -bool true
 # Enable Debug Menu in the Mac App Store
 defaults write com.apple.appstore ShowDebugMenu -bool true
 
+# Do NOT minimize application windows into their dock icon
+defaults write com.apple.dock minimize-to-application -BOOL
+
 ###############################################################################
 # SSD-specific tweaks                                                         #
 ###############################################################################
