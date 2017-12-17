@@ -51,6 +51,12 @@ if [ $OS = "OSX" ]; then
     done
 fi
 
+if [ $OS = "Linux" ]; then
+    for DOTFILE in "$DOTFILES_DIR"/system/.{env,alias,function,misc}.linux; do
+        [ -f "$DOTFILE" ] && . "$DOTFILE"
+    done
+fi
+
 if $SHELL_BASH; then
     for DOTFILE in "$DOTFILES_DIR"/system/.*.bash; do
         [ -f "$DOTFILE" ] && . "$DOTFILE"

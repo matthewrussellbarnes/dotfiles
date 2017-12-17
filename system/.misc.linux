@@ -1,0 +1,3 @@
+if ! { [ -n "$TMUX" ]; } then
+    eval `ssh-agent -s`
+fi
