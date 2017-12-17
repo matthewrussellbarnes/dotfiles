@@ -13,5 +13,4 @@
 
 # Set up for colors (solarized)
 
-# Depends on asdf
-# . "$DOTFILES_DIR/install/ruby.sh"
+. "$DOTFILES_DIR/install/ruby.sh"
