@@ -1,3 +1,6 @@
+. $HOME/.asdf/asdf.sh
+. $HOME/.asdf/completions/asdf.bash
+
 if ! { [ -n "$TMUX" ]; } then
     eval `ssh-agent -s`
 fi
