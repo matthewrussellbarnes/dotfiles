@@ -39,6 +39,14 @@ if [ ! -d ~/.asdf/plugins/packer ]; then
     asdf plugin-add packer http://github.com/Banno/asdf-hashicorp.git
 fi
 
+if [ ! -d ~/.asdf/plugins/java ]; then
+    asdf plugin-add java http://github.com/skotchpine/asdf-java.git
+fi
+
+if [ ! -d ~/.asdf/plugins/spark ]; then
+    asdf plugin-add spark http://github.com/joshuaballoch/asdf-spark.git
+fi
+
 asdf install postgres 9.5.6
 asdf global postgres 9.5.6
 
@@ -59,3 +67,9 @@ asdf global terraform 0.11.1
 
 asdf install packer 1.1.3
 asdf global packer 1.1.3
+
+asdf install java 9.0.1
+asdf global java 9.0.1
+
+asdf install spark 2.2.1
+asdf global spark 2.2.1
