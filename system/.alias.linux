@@ -1,0 +1,8 @@
+LS_COLORS=`is-supported "ls --color" --color -G`
+alias ll="LC_COLLATE=C LC_ALL=C ls -lA ${LS_COLORS}"
+
+function pbcopy () {
+  while read data; do
+    echo -n $data | /mnt/c/Windows/System32/clip.exe
+  done
+}
