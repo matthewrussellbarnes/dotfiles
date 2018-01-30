@@ -8,6 +8,8 @@ else
     git clone https://github.com/asdf-vm/asdf.git $ASDF_DIR --branch $ASDF_VERSION
 fi
 
+. $HOME/.asdf/asdf.sh
+
 asdf plugin-update --all
 
 if [ ! -d ~/.asdf/plugins/postgres ]; then

@@ -2,8 +2,6 @@
 
 . "$DOTFILES_DIR/linux/basic_packages.sh"
 
-# Install asdf
-
 # Install vundle for vim
 
 . "$DOTFILES_DIR/install/vundle.sh"
