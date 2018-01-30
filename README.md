@@ -2,7 +2,7 @@
 
 These are my dotfiles. Take anything you want, but at your own risk.
 
-It targets OS X systems, but since it has some defensive checks it should work on *nix as well (tested on a few Linux boxes).
+It works with OSX and Ubuntu on Windows (WSL). It installs a bunch of software that I use, so if you fork this you will probably want to drop things that you don't use.
 
 ## Install
 
