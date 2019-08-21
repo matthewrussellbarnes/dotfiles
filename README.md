@@ -32,7 +32,7 @@ Or, using wget:
 
     $ dotfiles help
     Usage: dotfiles <command>
-    
+
     Commands:
        help               This help message
        edit               Open dotfiles in default editor (vim) and Git GUI (stree)
@@ -88,4 +88,5 @@ You can put your custom settings, such as Git credentials in the `system/.custom
 
 ## Credits
 
+This dotfiles repo was originally forked from https://github.com/webpro/dotfiles.
 Many thanks to the [dotfiles community](http://dotfiles.github.io/) and the creators of the incredibly useful tools.
