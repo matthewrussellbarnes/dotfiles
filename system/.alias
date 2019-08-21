@@ -66,8 +66,9 @@ alias srv="sudo http-server $HOME/Projects/ -p 80 -c-1"
 
 # Network
 
-alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
-alias ipl="ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'"
+alias myip="dig +short myip.opendns.com @resolver1.opendns.com"
+alias cpip="myip | pbcopy"
+alias myipl="ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'"
 
 # Request using GET, POST, etc. method
 
@@ -86,3 +87,8 @@ alias quit="exit"
 alias week="date +%V"
 alias speedtest="wget -O /dev/null http://speedtest.wdc01.softlayer.com/downloads/test10.zip"
 alias openthegates="chown -R nobody:nogroup * && chmod -R 777 *"
+
+# Ctags
+
+# alias runctags "ctags -R --exclude=.bundle --exclude=.git/ --exclude=coverage/ --exclude=.arcanist-extensions/ --exclude=log/ --exclude=tmp/ --exclude=bin/"
+# alias runctagsrb "ctags -R --languages=ruby --exclude=.bundle --exclude=.git/ --exclude=coverage/ --exclude=.arcanist-extensions/ --exclude=log/ --exclude=tmp/ --exclude=bin/"

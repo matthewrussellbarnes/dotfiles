@@ -1,4 +1,4 @@
-" let $VIMRUNTIME = "/usr/local/Cellar/vim/8.0.0086/share/vim/vim80/"
+" let $VIMRUNTIME = "/usr/local/Cellar/vim/8.0.1800/share/vim/vim80/"
 " set runtimepath=~/.vim/,~/.vim,/etc/vim,/usr/share/vim/vimfiles,/usr/share/vim/addons,/usr/share/vim/vim80,/usr/share/vim/vimfiles,/usr/share/vim/addons/after,~/.vim/after
 " Section: Vundle
 
@@ -20,9 +20,10 @@
   Plugin 'kien/ctrlp.vim'
   Plugin 'rizzatti/dash.vim'
   Plugin 'editorconfig/editorconfig-vim'
-  Plugin 'ervandew/supertab'
+  " Plugin 'ervandew/supertab'
   Plugin 'scrooloose/nerdtree'
   Plugin 'scrooloose/nerdcommenter'
+  Plugin 'zxqfl/tabnine-vim'
   " Plugin 'luochen1990/rainbow'
   Plugin 'bling/vim-airline'
   Plugin 'vim-airline/vim-airline-themes'
@@ -34,11 +35,13 @@
   Plugin 'vim-ruby/vim-ruby'
   Plugin 'slim-template/vim-slim'
   Plugin 'tpope/vim-fugitive'
-  Plugin 'derekwyatt/vim-scala'
   Plugin 'tpope/vim-surround'
   Plugin 'scrooloose/syntastic'
+  Plugin 'tmux-plugins/vim-tmux-focus-events' " support for vim-tmux-clipboard
+  Plugin 'roxma/vim-tmux-clipboard'
   Plugin 'christoomey/vim-tmux-navigator' "Easy Pane Switching
-  Plugin 'jgdavey/vim-turbux' " TDD - run tests easily
+  Plugin 'janko-m/vim-test' " TDD - run tests
+  Plugin 'jgdavey/tslime.vim' " send commands to tmux (for tests)
   Plugin 'benmills/vimux'
   " Plugin 'junegunn/fzf'
   " Plugin 'junegunn/fzf.vim'
@@ -110,7 +113,7 @@
 
 " Section: Colours!
   syntax enable
-  set background=dark
+  set background=light
   colorscheme solarized
   let g:rainbow_active = 1
   let g:rainbow_conf = {
@@ -164,13 +167,16 @@
 
 " Section: Turbux TDD - Keymaps for running tests
   " Specify Commands
-  let g:turbux_command_rspec  = 'be time rspec'
-  let g:turbux_command_test_unit  = 'be time test'
-  let g:turbux_command_cucumber = 'be time cucumber'
+  let test#filename_modifier = ":p"
+  let test#strategy = "tslime"
+  let g:tslime_always_current_session = 1
+  let g:tslime_always_current_window = 1
 
   " Keymaps
-  map <C-T> <Plug>SendTestToTmux
-  map <C-F> <Plug>SendFocusedTestToTmux
+  map <C-T> :TestFile<CR>    " t Ctrl+n
+  map <C-F> :TestNearest<CR> " t Ctrl+f
+  map <C-G> :TestSuite<CR>   " t Ctrl+s
+
 
 " Section: NerdTree - Project Sidebar
   " quit NERDTree after openning a file
@@ -204,3 +210,6 @@
   let g:syntastic_check_on_open = 1
   let g:syntastic_check_on_wq = 0
   let g:syntastic_javascript_checkers = ['eslint']
+
+" Section: TMUX & System Clipboard
+  set clipboard=unnamed

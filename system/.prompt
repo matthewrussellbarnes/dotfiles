@@ -50,14 +50,51 @@ _bash_prompt_config() {
     local CYAN_BOLD="${ESC_OPEN}${BOLD}$(_setaf 6)${ESC_CLOSE}"
     local WHITE_BOLD="${ESC_OPEN}${BOLD}$(_setaf 7)${ESC_CLOSE}"
 
+    if tput setaf 1 &> /dev/null; then
+        if [[ $(tput colors) -ge 256 ]] 2>/dev/null; then
+          AWESOME_MAGENTA=$(tput setaf 9)
+          AWESOME_ORANGE=$(tput setaf 172)
+          AWESOME_GREEN=$(tput setaf 190)
+          AWESOME_PURPLE=$(tput setaf 141)
+          AWESOME_WHITE=$(tput setaf 0)
+        else
+          AWESOME_MAGENTA=$(tput setaf 5)
+          AWESOME_ORANGE=$(tput setaf 4)
+          AWESOME_GREEN=$(tput setaf 2)
+          AWESOME_PURPLE=$(tput setaf 1)
+          AWESOME_WHITE=$(tput setaf 7)
+        fi
+        AWESOME_BOLD=$(tput bold)
+        AWESOME_RESET=$(tput sgr0)
+    else
+        AWESOME_MAGENTA="\033[1;31m"
+        AWESOME_ORANGE="\033[1;33m"
+        AWESOME_GREEN="\033[1;32m"
+        AWESOME_PURPLE="\033[1;35m"
+        AWESOME_WHITE="\033[1;37m"
+        AWESOME_BOLD=""
+        AWESOME_RESET="\033[m"
+    fi
+
     # Expose the variables we need in prompt command
+    # Solarized Prompt
     P_USER=${GREEN}${USER_SYMBOL}
+    P_AT_SIGN=${P_YELLOW}@
     P_HOST=${BLUE}${HOST_SYMBOL}
-    P_GREEN=${GREEN}
-    P_YELLOW=${YELLOW}
+    P_PWD_COLOR=${YELLOW}
+    P_GIT_COLOR=${GREEN}
+    P_END_PROMPT_COLOR=${YELLOW}
+
+    # Awesome Prompt
+    # P_USER=${AWESOME_BOLD}${AWESOME_MAGENTA}${USER_SYMBOL}
+    # P_AT_SIGN=${AWESOME_YELLOW}@
+    # P_HOST=${AWESOME_ORANGE}${HOST_SYMBOL}
+    # P_PWD_COLOR=${AWESOME_YELLOW}
+    # P_GIT_COLOR=${AWESOME_PURPLE}
+    # P_END_PROMPT_COLOR=${AWESOME_MAGENTA}
+
     P_RED=${RED}
     P_RESET=${RESET}
-
 }
 
 bash_prompt_command() {
@@ -91,7 +128,10 @@ bash_prompt_command() {
         P_EXIT+="${P_RED}✘ "
     fi
 
-    PS1="${P_EXIT}${P_USER}${P_YELLOW}@${P_HOST} ${P_YELLOW}${P_PWD}${P_GREEN}${P_GIT}${P_YELLOW} > ${P_RESET}"
+    # Solarized Prompt
+    # PS1="${P_EXIT}${P_USER}${P_AT_SIGN}${P_HOST} ${P_PWD_COLOR}${P_PWD}${P_GIT_COLOR}${P_GIT}${P_YELLOW} > \n${P_RESET}"
+    # Awesome Prompt
+    PS1="${P_EXIT}${P_USER}${P_AT_SIGN}${P_HOST} ${P_PWD_COLOR}${P_PWD}${P_GIT_COLOR}${P_GIT}${P_END_PROMPT_COLOR} > \n${P_RESET}$ "
 }
 
 parse_git_branch() {

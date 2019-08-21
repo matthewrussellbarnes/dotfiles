@@ -14,11 +14,13 @@ apps=(
     cmake
     coreutils
     dockutil
+    direnv
     elixir
     ag
     git
     mackup
-    python
+    pidof
+    pyenv
     ruby-install
     tmux
     tree
