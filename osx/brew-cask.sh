@@ -7,6 +7,7 @@ apps=(
     flux
     google-chrome
     google-drive
+    iterm2
     spotify
     sublime-text3
     vlc
