@@ -1,9 +1,9 @@
 [user]
-    name = Joshua Balloch
-    email = joshuaballoch@gmail.com
+    name = Matt	Barnes
+    email = mbarnes2510@googlemail.com
 
 [github]
-    user = joshuaballoch
+    user = freesolo9b
 
 [core]
     excludesfile = /Users/joshuaballoch/.gitignore_global
