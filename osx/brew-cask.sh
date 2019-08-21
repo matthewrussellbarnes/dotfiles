@@ -10,6 +10,7 @@ apps=(
     spotify
     sublime-text3
     vlc
+    virtualbox
 )
 
 brew cask install "${apps[@]}"
