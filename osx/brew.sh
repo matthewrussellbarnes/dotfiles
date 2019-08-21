@@ -15,6 +15,9 @@ apps=(
     coreutils
     dockutil
     direnv
+    docker
+    docker-compose
+    docker-machine
     elixir
     ag
     git
