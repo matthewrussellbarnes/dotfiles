@@ -34,3 +34,6 @@ brew tap caskroom/versions
 . "$DOTFILES_DIR/osx/dock.sh"
 . "$DOTFILES_DIR/osx/defaults-chrome.sh"
 
+# Install flutter
+
+. "$DOTFILES_DIR/install/flutter.sh"

@@ -17,7 +17,8 @@
   Plugin 'mxw/vim-jsx'
   Plugin 'gmarik/Vundle.vim'
   Plugin 'rking/ag.vim'
-  Plugin 'kien/ctrlp.vim'
+  Plugin 'ctrlpvim/ctrlp.vim'
+  Plugin 'dart-lang/dart-vim-plugin'
   Plugin 'rizzatti/dash.vim'
   Plugin 'editorconfig/editorconfig-vim'
   " Plugin 'ervandew/supertab'
@@ -27,20 +28,25 @@
   " Plugin 'luochen1990/rainbow'
   Plugin 'bling/vim-airline'
   Plugin 'vim-airline/vim-airline-themes'
-  Plugin 'tpope/vim-endwise'
-  Plugin 'elixir-editors/vim-elixir'
-  Plugin 'tpope/vim-rails'
   Plugin 'kchmck/vim-coffee-script'
   Plugin 'Lokaltog/vim-easymotion'
+  Plugin 'elixir-editors/vim-elixir'
+  Plugin 'tpope/vim-endwise'
+  Plugin 'tpope/vim-fugitive'
+  Plugin 'tpope/vim-rhubarb' " enable :Gbrowse in vim-fugitive to open Github
+  Plugin 'jason0x43/vim-js-indent' " vim indenter for js and typescript
+  Plugin 'Quramy/vim-js-pretty-template' " syntax high for js templates
+  Plugin 'tpope/vim-rails'
   Plugin 'vim-ruby/vim-ruby'
   Plugin 'slim-template/vim-slim'
-  Plugin 'tpope/vim-fugitive'
-  Plugin 'tpope/vim-surround'
   Plugin 'scrooloose/syntastic'
-  Plugin 'tmux-plugins/vim-tmux-focus-events' " support for vim-tmux-clipboard
-  Plugin 'roxma/vim-tmux-clipboard'
-  Plugin 'christoomey/vim-tmux-navigator' "Easy Pane Switching
+  Plugin 'tpope/vim-surround'
   Plugin 'janko-m/vim-test' " TDD - run tests
+  Plugin 'roxma/vim-tmux-clipboard'
+  Plugin 'tmux-plugins/vim-tmux-focus-events' " support for vim-tmux-clipboard
+  Plugin 'christoomey/vim-tmux-navigator' "Easy Pane Switching
+  Plugin 'leafgarland/typescript-vim' " syntax highlighting typescript
+  Plugin 'Quramy/tsuquyomi' " access to TSserver for typscript
   Plugin 'jgdavey/tslime.vim' " send commands to tmux (for tests)
   Plugin 'benmills/vimux'
   " Plugin 'junegunn/fzf'
@@ -113,6 +119,7 @@
 
 " Section: Colours!
   syntax enable
+  autocmd BufNewFile,BufRead *.html.erb.deface set filetype=mason
   set background=light
   colorscheme solarized
   let g:rainbow_active = 1
@@ -210,6 +217,12 @@
   let g:syntastic_check_on_open = 1
   let g:syntastic_check_on_wq = 0
   let g:syntastic_javascript_checkers = ['eslint']
+  let g:sytastic_typescript_checkers = ['tsuquyomi']
 
 " Section: TMUX & System Clipboard
   set clipboard=unnamed
+
+" Section: Typescript
+  map <C-\> :TsuDefinition<CR>
+  " tooltip? https://vimawesome.com/plugin/tsuquyomi
+  " autocmd FileType typescript nmap <Leader>T : <C-u>echo tsuquyomi#hint()<CR>

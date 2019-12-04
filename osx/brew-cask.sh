@@ -1,16 +1,17 @@
 #!/usr/bin/env bash
 
 apps=(
-    dash
     dropbox
     firefox
     flux
     google-chrome
     iterm2
     spotify
+    slack
     vlc
     virtualbox
     visual-studio-code
+    whatsapp
 )
 
 brew cask install "${apps[@]}"
