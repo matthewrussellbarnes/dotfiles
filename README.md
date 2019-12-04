@@ -51,7 +51,7 @@ You can put your custom settings, such as Git credentials in the `system/.custom
 * Core
     * Bash + [coreutils](http://en.wikipedia.org/wiki/GNU_Core_Utilities) + bash-completion
     * gnu-sed, grep, psgrep, tree, wget
-    * Git + [SourceTree](http://www.sourcetreeapp.com) + [hub](http://hub.github.com/), Subversion + [Cornerstone](https://www.zennaware.com/cornerstone/)
+    * Git
     * Node.js + npm
     * Python
 * Graphics
