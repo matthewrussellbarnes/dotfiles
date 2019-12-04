@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
 
 apps=(
+    1password
     dropbox
     firefox
-    flux
     google-chrome
     iterm2
+    spectacle
     spotify
     slack
     vlc
