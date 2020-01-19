@@ -18,6 +18,7 @@ ln -sfv "$DOTFILES_DIR/runcom/.vimrc" ~
 ln -sfv "$DOTFILES_DIR/runcom/.tmux.conf" ~
 ln -sfv "$DOTFILES_DIR/runcom/.agignore" ~
 ln -sfv "$DOTFILES_DIR/git/.gitconfig" ~
+mkdir -p ~/.aws && ln -sfv ~/Dropbox/settings/aws/config ~/.aws/
 ln -sfv "$DOTFILES_DIR/git/.gitignore_global" ~
 ln -sfv "$DOTFILES_DIR/etc/mackup/.mackup.cfg" ~
 
