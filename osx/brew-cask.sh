@@ -2,16 +2,22 @@
 
 apps=(
     1password
+    anki
+    discord
     dropbox
+    evernote
     firefox
     google-chrome
     iterm2
     spectacle
+    karabiner-elements
+    signal
+    slack
     spotify
     slack
-    vlc
     virtualbox
     visual-studio-code
+    vlc
     whatsapp
 )
 
