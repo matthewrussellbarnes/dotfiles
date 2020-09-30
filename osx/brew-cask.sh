@@ -11,10 +11,12 @@ apps=(
     iterm2
     spectacle
     karabiner-elements
+    mendeley
     signal
     slack
     spotify
     slack
+    private-internet-access
     visual-studio-code
     vlc
     whatsapp
