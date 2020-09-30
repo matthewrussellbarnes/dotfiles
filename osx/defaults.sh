@@ -11,10 +11,10 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 ###############################################################################
 
 # Set computer name (as done via System Preferences → Sharing)
-sudo scutil --set ComputerName "yoshi-b"
-sudo scutil --set HostName "yoshi-b"
-sudo scutil --set LocalHostName "yoshi-b"
-sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "yoshi-b"
+sudo scutil --set ComputerName "freisolninby"
+sudo scutil --set HostName "freisolninby"
+sudo scutil --set LocalHostName "freisolninby"
+sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "freisolninby"
 
 # Set standby delay to 24 hours (default is 1 hour)
 # sudo pmset -a standbydelay 86400
@@ -235,7 +235,7 @@ defaults write com.apple.dock show-process-indicators -bool true
 # defaults write com.apple.dock launchanim -bool false
 
 # Automatically hide and show the Dock
-defaults write com.apple.dock autohide -bool true
+defaults write com.apple.dock autohide -bool false
 
 # Make Dock icons of hidden applications translucent
 defaults write com.apple.dock showhidden -bool true
@@ -394,10 +394,10 @@ defaults write com.apple.mail PlayMailSounds -bool false
 defaults write com.apple.terminal StringEncodings -array 4
 
 # Set Terminal Theme
-open "$HOME/.terminal/colors/osx-terminal.app-colors-solarized/Solarized Dark ansi.terminal"
-sleep 1 # Wait a bit to make sure the theme is loaded
-defaults write com.apple.terminal "Default Window Settings" -string "Solarized Dark ansi"
-defaults write com.apple.terminal "Startup Window Settings" -string "Solarized Dark ansi"
+# open "$HOME/.terminal/colors/osx-terminal.app-colors-solarized/Solarized Dark ansi.terminal"
+# sleep 1 # Wait a bit to make sure the theme is loaded
+# defaults write com.apple.terminal "Default Window Settings" -string "Solarized Dark ansi"
+# defaults write com.apple.terminal "Startup Window Settings" -string "Solarized Dark ansi"
 
 # Disable audible and visual bells
 defaults write com.apple.terminal "Bell" -bool false

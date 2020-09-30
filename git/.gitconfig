@@ -6,8 +6,8 @@
     user = freesolo9b
 
 [core]
-    excludesfile = /Users/joshuaballoch/.gitignore_global
-    editor = nvim
+    excludesfile = ~/.gitignore_global
+    editor = code
     filemode = false
     trustctime = false
 

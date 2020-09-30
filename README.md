@@ -39,8 +39,6 @@ Or, using wget:
        reload             Reload dotfiles
        update             Update packages and pkg managers: OS X Applications, Homebrew/Cask, npm, Ruby, and pip
        osx                Apply OS X system defaults
-       dock               Apply OS X Dock settings
-       install vundle     Install Vundle
 
 ## Custom settings
 

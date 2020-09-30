@@ -15,7 +15,6 @@ apps=(
     slack
     spotify
     slack
-    virtualbox
     visual-studio-code
     vlc
     whatsapp

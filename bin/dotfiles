@@ -12,8 +12,6 @@ sub_help () {
     echo "   reload             Reload dotfiles"
     echo "   update             Update packages and pkg managers: OS X Applications, Homebrew/Cask, npm, Ruby, and pip"
     echo "   osx                Apply OS X system defaults"
-    echo "   dock               Apply OS X Dock settings"
-    echo "   install vundle     Install Vundle"
 }
 
 sub_edit () {
@@ -28,8 +26,6 @@ sub_update () {
     sudo softwareupdate -i -a
     brew update
     brew upgrade
-    sudo gem update --system
-    sudo gem update
 }
 
 sub_osx () {
@@ -37,10 +33,6 @@ sub_osx () {
         [ -f "$DEFAULTS_FILE" ] && echo "Applying $DEFAULTS_FILE" && . "$DEFAULTS_FILE"
     done
     echo "Done. Some changes may require a logout/restart to take effect."
-}
-
-sub_dock () {
-    . "$DOTFILES_DIR/osx/dock.sh" && echo "Dock reloaded."
 }
 
 sub_install () {

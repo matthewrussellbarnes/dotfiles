@@ -14,33 +14,22 @@ brew tap petere/postgresql
 apps=(
     reattach-to-user-namespace
     bash-completion2
-    chruby
     cmake
     coreutils
-    dockutil
     direnv
     docker
     docker-compose
     docker-machine
-    elixir
     ag
     git
     mackup
     nvm
     pidof
     pyenv
-    pyenv-virtualenv
-    ruby-install
-    terraform
     tmux
     tmuxinator
     tree
     vim
-    nvim
-    yarn
-    postgresql-common
-    postgresql-9.4
-    postgresql-9.6
 )
 # Put postgres last as it is likeliest to run into issues installing
 
