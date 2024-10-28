@@ -31,6 +31,7 @@ apps=(
     pyenv
     pyenv-virtualenv
     ruby-install
+    terraform
     tmux
     tmuxinator
     tree
