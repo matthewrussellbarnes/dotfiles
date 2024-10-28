@@ -15,6 +15,8 @@ ln -sfv "$DOTFILES_DIR/runcom/.ruby-version" ~
 ln -sfv "$DOTFILES_DIR/runcom/.bash_profile" ~
 ln -sfv "$DOTFILES_DIR/runcom/.inputrc" ~
 ln -sfv "$DOTFILES_DIR/runcom/.vimrc" ~
+mkdir -p ~/.config/nvim/
+ln -sfv "$DOTFILES_DIR/runcom/.nvim.init.vim" ~/.config/nvim/init.vim
 ln -sfv "$DOTFILES_DIR/runcom/.tmux.conf" ~
 ln -sfv "$DOTFILES_DIR/runcom/.agignore" ~
 ln -sfv "$DOTFILES_DIR/git/.gitconfig" ~

@@ -33,19 +33,31 @@ _bash_prompt_config() {
     # Normal colors
     local BLACK="${ESC_OPEN}$(_setaf 0)${ESC_CLOSE}"
     local RED="${ESC_OPEN}$(_setaf 1)${ESC_CLOSE}"
-    local GREEN="${ESC_OPEN}$(_setaf 2)${ESC_CLOSE}"
+    # local GREEN="${ESC_OPEN}$(_setaf 2)${ESC_CLOSE}"
+    # Brighter green when using dark
+    local GREEN="${ESC_OPEN}$(_setaf 40)${ESC_CLOSE}"
     local YELLOW="${ESC_OPEN}$(_setaf 3)${ESC_CLOSE}"
-    local BLUE="${ESC_OPEN}$(_setaf 4)${ESC_CLOSE}"
+    # local BLUE="${ESC_OPEN}$(_setaf 4)${ESC_CLOSE}"
+    # Brighter blue when using dark
+    # local BLUE="${ESC_OPEN}$(_setaf 4)${ESC_CLOSE}"
+    local BLUE="${ESC_OPEN}$(_setaf 39)${ESC_CLOSE}"
     local VIOLET="${ESC_OPEN}$(_setaf 5)${ESC_CLOSE}"
+    # Brighter pink when using dark
+    # local PINK="${ESC_OPEN}$(_setaf 162)${ESC_CLOSE}"
+    local PINK="${ESC_OPEN}$(_setaf 198)${ESC_CLOSE}"
     local CYAN="${ESC_OPEN}$(_setaf 6)${ESC_CLOSE}"
     local WHITE="${ESC_OPEN}$(_setaf 7)${ESC_CLOSE}"
 
     # Bold colors
     local BLACK_BOLD="${ESC_OPEN}${BOLD}$(_setaf 0)${ESC_CLOSE}"
     local RED_BOLD="${ESC_OPEN}${BOLD}$(_setaf 1)${ESC_CLOSE}"
-    local GREEN_BOLD="${ESC_OPEN}${BOLD}$(_setaf 2)${ESC_CLOSE}"
+    # local GREEN_BOLD="${ESC_OPEN}${BOLD}$(_setaf 2)${ESC_CLOSE}"
+    # Brighter green when using dark
+    local GREEN_BOLD="${ESC_OPEN}${BOLD}$(_setaf 40)${ESC_CLOSE}"
     local YELLOW_BOLD="${ESC_OPEN}${BOLD}$(_setaf 3)${ESC_CLOSE}"
-    local BLUE_BOLD="${ESC_OPEN}${BOLD}$(_setaf 4)${ESC_CLOSE}"
+    # Brighter blue when using dark
+    # local BLUE_BOLD="${ESC_OPEN}${BOLD}$(_setaf 4)${ESC_CLOSE}"
+    local BLUE_BOLD="${ESC_OPEN}${BOLD}$(_setaf 39)${ESC_CLOSE}"
     local VIOLET_BOLD="${ESC_OPEN}${BOLD}$(_setaf 5)${ESC_CLOSE}"
     local CYAN_BOLD="${ESC_OPEN}${BOLD}$(_setaf 6)${ESC_CLOSE}"
     local WHITE_BOLD="${ESC_OPEN}${BOLD}$(_setaf 7)${ESC_CLOSE}"
@@ -81,9 +93,9 @@ _bash_prompt_config() {
     P_USER=${GREEN}${USER_SYMBOL}
     P_AT_SIGN=${P_YELLOW}@
     P_HOST=${BLUE}${HOST_SYMBOL}
-    P_PWD_COLOR=${YELLOW}
+    P_PWD_COLOR=${PINK}
     P_GIT_COLOR=${GREEN}
-    P_END_PROMPT_COLOR=${YELLOW}
+    P_END_PROMPT_COLOR=${PINK}
 
     # Awesome Prompt
     # P_USER=${AWESOME_BOLD}${AWESOME_MAGENTA}${USER_SYMBOL}

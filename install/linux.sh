@@ -19,7 +19,3 @@
 # Install ASDF and packages
 . "$DOTFILES_DIR/linux/asdf.sh"
 
-# Install flutter
-
-. "$DOTFILES_DIR/install/flutter.sh"
-
