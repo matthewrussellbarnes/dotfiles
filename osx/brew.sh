@@ -1,36 +1,39 @@
 #!/usr/bin/env bash
 
 # Update Homebrew, formulae, and packages
-
-brew update
+brew update 
 brew upgrade
 
-# Tap petere postgresql to install multiple postgres versions
-#    Link: https://medium.com/keeping-code/running-multiple-postgresql-versions-simultaneously-on-macos-linux-90b3d7e08ffd
-brew tap petere/postgresql
+# Install packages
+apps=(
+   bash-completion@2
+   cmake
+   coreutils
+   direnv
+   docker
+   docker-compose
+   ag
+   git
+   mackup
+   nvm
+   pidof
+   pyenv
+   tmux
+   tmuxinator
+   tree
+   vim
+)
 
 # Install packages
+for app in "${apps[@]}"; do
+   brew install $app || brew upgrade $app
+done
 
-apps=(
-    reattach-to-user-namespace
-    bash-completion2
-    cmake
-    coreutils
-    direnv
-    docker
-    docker-compose
-    docker-machine
-    ag
-    git
-    mackup
-    nvm
-    pidof
-    pyenv
-    tmux
-    tmuxinator
-    tree
-    vim
-)
-# Put postgres last as it is likeliest to run into issues installing
+# Additional setup for certain packages
+if command -v pyenv 1>/dev/null 2>&1; then
+   eval "$(pyenv init -)"
+fi
 
-brew install "${apps[@]}"
+if [ -f $(brew --prefix)/etc/bash_completion ]; then
+   . $(brew --prefix)/etc/bash_completion
+fi

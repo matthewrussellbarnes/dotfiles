@@ -1,15 +1,13 @@
 #!/usr/bin/env bash
 
 # Get current dir (so run this script from anywhere)
-
 export DOTFILES_DIR
 DOTFILES_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # Update dotfiles itself first
-
-[ -d "$DOTFILES_DIR/.git" ] && git --work-tree="$DOTFILES_DIR" --git-dir="$DOTFILES_DIR/.git" pull origin master
-
-# Bunch of symlinks
+if [ -d "$DOTFILES_DIR/.git" ]; then
+   git --work-tree="$DOTFILES_DIR" --git-dir="$DOTFILES_DIR/.git" pull origin master
+fi
 
 ln -sfv "$DOTFILES_DIR/runcom/.bash_profile" ~
 ln -sfv "$DOTFILES_DIR/runcom/.inputrc" ~
@@ -20,9 +18,7 @@ mkdir -p ~/.aws && ln -sfv ~/Dropbox/settings/aws/config ~/.aws/
 ln -sfv "$DOTFILES_DIR/git/.gitignore_global" ~
 ln -sfv "$DOTFILES_DIR/etc/mackup/.mackup.cfg" ~
 
-# if [ "$(uname)" == "Catalina" -a -f "$DOTFILES_DIR/install/osx.sh" ]; then
-    . "$DOTFILES_DIR/install/osx.sh"
-# fi
-# if [ "$(uname)" == "Linux" -a -f "$DOTFILES_DIR/install/linux.sh" ]; then
-    # . "$DOTFILES_DIR/install/linux.sh"
-# fi
+# Setup OS
+if [ -f "$DOTFILES_DIR/install/osx.sh" ]; then
+   . "$DOTFILES_DIR/install/osx.sh"
+fi
