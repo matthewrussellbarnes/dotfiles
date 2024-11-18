@@ -2,17 +2,12 @@
 
 apps=(
     1password
+    anaconda
     anki
     discord
-    dropbox
-    evernote
-    firefox
     google-chrome
-    iterm2
-    spectacle
     karabiner-elements
-    mendeley
-    signal
+    microsoft-teams
     slack
     spotify
     slack
