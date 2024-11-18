@@ -1,82 +1,169 @@
+#!/usr/bin/env bash
+
 # If not running interactively, don't do anything
+case $- in
+    *i*) ;;
+      *) return;;
+esac
 
-[ -z "$PS1" ] && return
+#
+# Shell Detection
+#
 
-# Shell
+declare -A SHELL_INFO=(
+    [ZSH]=false
+    [BASH]=false
+)
 
 if [ -n "$ZSH_VERSION" ]; then
-   SHELL_ZSH=true
-   SHELL_BASH=false
+    SHELL_INFO[ZSH]=true
 elif [ -n "$BASH_VERSION" ]; then
-   SHELL_BASH=true
-   SHELL_ZSH=false
+    SHELL_INFO[BASH]=true
 fi
 
-# OS
+#
+# OS Detection
+#
 
-if [ "$(uname -s)" = "Darwin" ]; then
-    OS="OSX"
-else
-    OS=`uname -s`
-fi
+case "$(uname -s)" in
+    Sequoia*)
+        OS="Sequoia"
+        ;;
+    Linux*)
+        OS="Linux"
+        ;;
+    *)
+        OS="Unknown"
+        ;;
+esac
 
-# Resolve DOTFILES_DIR (assuming ~/.dotfiles on distros without readlink and/or $BASH_SOURCE/$0)
+#
+# Utility Functions
+#
 
-READLINK=$(which greadlink || which readlink)
-if $SHELL_BASH; then
-    CURRENT_SCRIPT=${BASH_SOURCE}
-else
-    CURRENT_SCRIPT=${0}
-fi
+debug() {
+    if [[ "${DOTFILES_DEBUG}" == "true" ]]; then
+        echo "DEBUG: $*"
+    fi
+}
 
-if [[ -n $CURRENT_SCRIPT && -x "$READLINK" ]]; then
-    SCRIPT_PATH=$($READLINK -f "$CURRENT_SCRIPT")
-    DOTFILES_DIR=$(dirname $(dirname ${SCRIPT_PATH}))
-elif [ -d "$HOME/.dotfiles" ]; then
-    DOTFILES_DIR="$HOME/.dotfiles"
-else
-    echo "Unable to find dotfiles, exiting."
-    return # `exit 1` would quit the shell itself
-fi
+error() {
+    echo "ERROR: $*" >&2
+}
 
-# Finally we can source the dotfiles (order matters)
+#
+# Dotfiles Directory Resolution
+#
 
-for DOTFILE in "$DOTFILES_DIR"/system/.{function,path,env,alias,completion,grep,prompt,custom,tmux}; do
-    [ -f "$DOTFILE" ] && . "$DOTFILE"
-done
+resolve_dotfiles_dir() {
+    local current_script readlink_cmd script_path
 
-if [ $OS = "OSX" ]; then
-    for DOTFILE in "$DOTFILES_DIR"/system/.{env,alias,function}.osx; do
-        [ -f "$DOTFILE" ] && . "$DOTFILE"
+    # Prefer greadlink (GNU readlink) over BSD readlink
+    readlink_cmd=$(command -v greadlink || command -v readlink)
+
+    if ${SHELL_INFO[BASH]}; then
+        current_script=${BASH_SOURCE[0]}
+    else
+        current_script=${0:A}  # zsh equivalent of readlink -f
+    fi
+
+    if [[ -n $current_script && -x "$readlink_cmd" ]]; then
+        script_path=$("$readlink_cmd" -f "$current_script")
+        echo "$(dirname "$(dirname "$script_path")")"
+    elif [[ -d "$HOME/.dotfiles" ]]; then
+        echo "$HOME/.dotfiles"
+    elif [[ -d "$XDG_CONFIG_HOME/dotfiles" ]]; then
+        echo "$XDG_CONFIG_HOME/dotfiles"
+    else
+        error "Unable to find dotfiles directory"
+        return 1
+    fi
+}
+
+#
+# Configuration Loading
+#
+
+load_dotfile() {
+    local dotfile=$1
+    if [[ -f "$dotfile" ]]; then
+        debug "Loading $dotfile"
+        # shellcheck source=/dev/null
+        . "$dotfile"
+    fi
+}
+
+load_dotfiles() {
+    local dotfiles_dir=$1
+    local os=$2
+
+    # Core configuration files
+    local core_files=(
+        "function"
+        "path"
+        "env"
+        "alias"
+        "completion"
+        "grep"
+        "prompt"
+        "custom"
+        "tmux"
+    )
+
+    # Load core configuration
+    for config in "${core_files[@]}"; do
+        load_dotfile "$dotfiles_dir/system/.$config"
     done
-fi
 
-if [ $OS = "Linux" ]; then
-    for DOTFILE in "$DOTFILES_DIR"/system/.{env,alias,function,misc}.linux; do
-        [ -f "$DOTFILE" ] && . "$DOTFILE"
+    # OS-specific configuration
+    if [[ "$os" == "Sequoia" ]]; then
+        local darwin_files=("env.darwin" "alias.darwin" "function.darwin")
+        for config in "${darwin_files[@]}"; do
+            load_dotfile "$dotfiles_dir/system/.$config"
+        done
+    elif [[ "$os" == "Linux" ]]; then
+        local linux_files=("env.linux" "alias.linux" "function.linux" "misc.linux")
+        for config in "${linux_files[@]}"; do
+            load_dotfile "$dotfiles_dir/system/.$config"
+        done
+    fi
+
+    # Shell-specific configuration
+    if ${SHELL_INFO[BASH]}; then
+        for config in "$dotfiles_dir"/system/.*.bash; do
+            load_dotfile "$config"
+        done
+    elif ${SHELL_INFO[ZSH]}; then
+        for config in "$dotfiles_dir"/system/.*.zsh; do
+            load_dotfile "$config"
+        done
+    fi
+}
+
+#
+# Main
+#
+
+main() {
+    # Initialize XDG Base Directory variables if not set
+    export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
+    export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
+    export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
+
+    # Resolve dotfiles directory
+    DOTFILES_DIR=$(resolve_dotfiles_dir) || return 1
+
+    # Load all dotfiles
+    load_dotfiles "$DOTFILES_DIR" "$OS"
+
+    # Export important variables
+    export DOTFILES_DIR OS
+    for shell in "${!SHELL_INFO[@]}"; do
+        export "SHELL_${shell}=${SHELL_INFO[$shell]}"
     done
-fi
 
-if $SHELL_BASH; then
-    for DOTFILE in "$DOTFILES_DIR"/system/.*.bash; do
-        [ -f "$DOTFILE" ] && . "$DOTFILE"
-    done
-fi
+    # Clean up
+    unset -f resolve_dotfiles_dir load_dotfile load_dotfiles debug error
+}
 
-if $SHELL_ZSH; then
-    for DOTFILE in "$DOTFILES_DIR"/system/.*.zsh; do
-        [ -f "$DOTFILE" ] && . "$DOTFILE"
-    done
-fi
-
-# Clean up
-
-unset READLINK CURRENT_SCRIPT SCRIPT_PATH DOTFILE
-
-# Export
-
-export SHELL_BASH SHELL_ZSH OS DOTFILES_DIR
-
-# Remove annoying zsh message
-
-export BASH_SILENCE_DEPRECATION_WARNING=1
+main "$@"
